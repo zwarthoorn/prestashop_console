@@ -1,0 +1,14 @@
+{
+  "name": "flooris/prestashop_console",
+  "description": "Command line utility to manage a Prestashop installation",
+  "type": "utility",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Floor InternetServices",
+      "email": "info@flooris.nl"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {}
+}
