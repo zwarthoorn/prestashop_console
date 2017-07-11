@@ -8,6 +8,9 @@ use Flooris\Prestashop\Commands\Translations\ExportMetaTranslationsCommand;
 use Flooris\Prestashop\Commands\Translations\ExportModuleTranslationsCommand;
 use Flooris\Prestashop\Commands\Translations\ExportGenericTranslationsCommand;
 use Flooris\Prestashop\Commands\Translations\ExportCategoriesTranslationsCommand;
+use Flooris\Prestashop\Commands\Filters\FiltersImportCommand;
+use Flooris\Prestashop\Commands\Filters\FiltersExportCommand;
+use Flooris\Prestashop\Commands\Filters\FiltersListCategoryCommand;
 
 
 // Initialize Application
@@ -20,6 +23,10 @@ $application->addCommands([
     new ExportModuleTranslationsCommand,
     new ExportGenericTranslationsCommand,
     new ExportCategoriesTranslationsCommand,
+
+    new FiltersImportCommand,
+    new FiltersExportCommand,
+    new FiltersListCategoryCommand,
 ]);
 
 // Return the application
