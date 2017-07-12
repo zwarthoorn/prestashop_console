@@ -24,6 +24,13 @@ class ExportCmsTranslationsCommand extends PrestashopCommand
                 'Language ID that is used as the export source',
                 1
             )
+            ->addOption(
+                'id_shop',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Shop ID that is used as the export source',
+                1
+            )
             ->addArgument(
                 'target',
                 InputArgument::OPTIONAL,
@@ -36,6 +43,7 @@ class ExportCmsTranslationsCommand extends PrestashopCommand
     {
         $target = $this->input->getArgument('target');
         $id_lang = (int)$this->input->getOption('id_lang');
+        $id_shop = (int)$this->input->getOption('id_shop');
 
         // Ensure the target path always ends with a /
         $target .= ends_with($target, '/') ? '' : '/';
@@ -48,7 +56,7 @@ class ExportCmsTranslationsCommand extends PrestashopCommand
         }
 
         // Get a list of the available CMS pages
-        $pages = $this->getCmsPages($id_lang);
+        $pages = $this->getCmsPages($id_lang, $id_shop);
         $pages = collect($pages);
 
         // Save all pages and their data in a folder
@@ -83,12 +91,14 @@ class ExportCmsTranslationsCommand extends PrestashopCommand
         });
     }
 
-    protected function getCmsPages($id_lang)
+    protected function getCmsPages($id_lang, $id_shop)
     {
         $sql = '
             SELECT cms_lang.id_cms, meta_title, meta_description, meta_keywords, content, link_rewrite
             FROM '._DB_PREFIX_.'cms_lang AS cms_lang
-            WHERE cms_lang.id_lang = '.(int)$id_lang;
+            JOIN '._DB_PREFIX_.'cms_shop AS cms_shop ON (cms_shop.id_cms = cms_lang.id_cms)
+            WHERE cms_lang.id_lang = '.(int)$id_lang.'
+            AND cms_shop.id_shop = '.(int)$id_shop;
 
         $pages = Db::getInstance()->executeS($sql);
 
