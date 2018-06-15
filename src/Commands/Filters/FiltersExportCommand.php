@@ -108,6 +108,10 @@ class FiltersExportCommand extends PrestashopCommand
         $matches = [];
         preg_match("/^layered_([a-z]+)_([a-z]+)_([a-z0-9]+)$/i", $type_key, $matches);
 
+        if (empty($matches)){
+            preg_match("/^layered_([a-z]+)_([a-z]+)$/i",$type_key,$matches);
+        }
+
         if ( ! $matches || ! count($matches) ) {
             return false;
         }
