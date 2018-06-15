@@ -1,0 +1,32 @@
+{
+  "name": "flooris/prestashop_console",
+  "description": "Command line utility to manage a Prestashop installation",
+  "type": "utility",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Floor InternetServices",
+      "email": "info@flooris.nl"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "symfony/console": "^3.3",
+    "symfony/filesystem": "^3.3",
+    "symfony/finder": "^3.3",
+    "illuminate/support": "^5.4",
+    "illuminate/filesystem": "^5.4"
+  },
+  "require-dev": {
+    "symfony/debug": "^3.3",
+    "symfony/var-dumper": "^3.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Flooris\\Prestashop\\": "src/"
+    }
+  },
+  "bin": [
+    "bin/prestaconsole"
+  ]
+}
